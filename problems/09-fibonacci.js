@@ -19,12 +19,24 @@ fibonacci(4); // 3
 fibonacci(10); // 55
 ***********************************************************************/
 
-// your code here
-  
+function fibonacci(n) {
+  // base case: if n is 0, return 0
+  if (n === 0) {
+    return 0;
+  }
+
+  // base case: first two fibonacci numbers are 1
+  if (n === 1 || n === 2) {
+    return 1;
+  }
+
+  // recursive case: return sum of previours two fibonacci numbers
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = fibonacci;
 } catch (e) {
   module.exports = null;
 }
-  

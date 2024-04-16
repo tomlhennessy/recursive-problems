@@ -12,7 +12,20 @@ addToTwelve([1, 12, 4, 7, 6]); // false
 addToTwelve([1]); // false
 ***********************************************************************/
 
-// your code here
+function addToTwelve(arr) {
+  // base case: if array has less than two elements, return false
+  if (arr.length < 2) {
+    return false;
+  }
+
+  // check if sum of first two elements is 12
+  if (arr[0] + arr[1] === 12) {
+    return true;
+  }
+
+  // recursive case: check rest of array
+  return addToTwelve(arr.slice(1));
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
