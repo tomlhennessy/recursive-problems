@@ -12,7 +12,16 @@ reverse("id"); // "di"
 reverse(""); // ""
 ***********************************************************************/
 
-// your code here
+function reverse(string) {
+  // base case: if string is empty or only contains 1 char, return itself
+  if (string.length <= 1) {
+    return string;
+  }
+
+  // recursive case: return last char of string concatenated with
+  // result of calling reverse on substring excluding last char
+  return string.slice(-1) + reverse(string.slice(0, -1));
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {

@@ -11,7 +11,16 @@ range(7, 6); // []
 ***********************************************************************/
 
 
-// your code here
+function range(start, end) {
+  // base case: if end number is <= start, return empty array
+  if (end <= start) {
+    return [];
+  }
+
+  // recursive case: add start to array and concatenate it with
+  // result of calling range with start plus 1 and end
+  return [start].concat(range(start + 1, end));
+}
 
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
