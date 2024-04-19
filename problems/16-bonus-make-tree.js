@@ -64,8 +64,30 @@ The call above should return the tree below:
 ***********************************************************************/
 
 const makeTree = (categories, parent) => {
-  // your code here
+  // initialise empty object to store the tree
+  const tree = {};
+
+  // filter categories to get only those with the specified parent
+  categories
+      .filter(category => category.parent === parent)
+      // for each category with the specified parent
+      .forEach(category => {
+        // recursively call makeTree to build subtree for this category
+        // assign subtree to the category's id key in the tree object
+        tree[category.id] = makeTree(categories, category.id);
+      });
+
+      // return the constructed tree
+      return tree;
 };
+
+/* To implement the 'makeTree'function recursively in JavaScript, we can follow these steps:
+
+1. Initialise an empty object to store the tree
+2. Iterate through the categories array
+3. For each category:
+  - if the parent is null, it's a root category, so add it directly to the tree object
+  - If the parent is not null, recursively add the category to its parent's children category */
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
