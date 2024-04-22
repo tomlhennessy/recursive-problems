@@ -12,7 +12,29 @@ permutations([1, 2, 3]) // [[1, 2, 3], [1, 3, 2],
                         // [3, 1, 2], [3, 2, 1]]
 ***********************************************************************/
 
-// your code here
+function permutations(array) {
+  if (array.length === 0) {
+    return [[]]; // base case: empty array has one permutation, an empty array itself
+  }
+
+  const firstElement = array[0];
+  const rest = array.slice(1);
+
+  // recursive call to get permutations of the rest of the array
+  const permsWithoutFirst = permutations(rest);
+
+  const allPermutations = [];
+
+  // for each permutation of rest of array, insert firstElement in all possible positions
+  permsWithoutFirst.forEach(perm => {
+    for (let i = 0; i <= perm.length; i++) {
+      const permutation = [...perm.slice(0, i), firstElement, ...perm.slice(i)];
+      allPermutations.push(permutation);
+    }
+  });
+
+  return allPermutations;
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {

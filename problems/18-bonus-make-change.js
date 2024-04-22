@@ -54,12 +54,62 @@ combinations.
 ***********************************************************************/
 
 function greedyMakeChange(target, coins = [25, 10, 5, 1]) {
-  // no tests for greedyMakeChange so make sure to test this on your own
-  // your code here
+  // base case: if the target is 0, no change is needed
+  if (target === 0) {
+    return [];
+  }
+
+  const result = []; // initialise an array to store the result
+
+  // iterate through each coin denomination
+  for (let i = 0; i < coins.length; i++) {
+    const coin = coins[i];
+    // while current coin can be used to reduce target amount
+    while (target >= coin) {
+      result.push(coin); // add coin to the result
+      target -= coin; // subtract coin value from the target
+    }
+  }
+
+  return result; // return resulting array containing change
 }
 
 function makeBetterChange(target, coins = [25, 10, 5, 1]) {
-  // your code here
+  // base case: if the target is 0, no change is needed
+  if (target === 0) {
+    return [];
+  }
+
+  let bestChange = null; // initialise a variable to store best change found
+
+  // iterate through each coin denomination
+  for (let i = 0; i < coins.length; i++) {
+    const coin = coins[i];
+
+    // skip coins that are larger than target
+    if (coin > target) {
+      continue;
+    }
+
+    // calculate remaining target amount after subtracting current coin value
+    const remainingTarget = target - coin;
+
+    // recursively call makeBetterChange with remaining target
+    // and pass only coins with values less than or equal to current coin
+    const remainingChange = makeBetterChange(remainingTarget, coins.slice(i));
+
+    // if a valid remaining change is found
+    if (remainingChange !== null) {
+      // combine current coin with remaining change
+      const change = [coin, ...remainingChange];
+      // update the bestChange if it's null or new change is shorter
+      if (bestChange === null || change.length < bestChange.length) {
+        bestChange = change;
+      }
+    }
+  }
+
+  return bestChange; // return the best change found
 }
 
 
